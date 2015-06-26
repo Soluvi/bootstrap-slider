@@ -1435,9 +1435,11 @@
 				element.className = newClasses.trim();
 			},
 			_offsetLeft: function(obj){
-				var offsetLeft = obj.offsetLeft;
-				while((obj = obj.offsetParent) && !isNaN(obj.offsetLeft)){
-					offsetLeft += obj.offsetLeft;
+				var ofetLeft = obj.offsetLeft;
+				while(obj = obj.offsetParent){
+					if (!isNaN(obj.offsetLeft))
+						offsetLeft += obj.offsetLeft;
+					offsetLeft -= $(obj).scrollLeft();
 				}
 				return offsetLeft;
 			},
